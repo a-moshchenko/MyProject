@@ -1,0 +1,10 @@
+python -m venv venv
+. ./venv/bin/activate
+pip install -r requirements.txt
+cd vote
+python3 manage.py migrate
+
+echo Создание суперпользователя:
+
+python manage.py createsuperuser
+python3 manage.py load_from_excel

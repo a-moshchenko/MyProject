@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center">
+
+    <div class="mt-5 pt-5 text-center">
+      <h2 class="mt-5 pt-5 text-center">Для пiдвищення захисту пропоную Вам змiнити пароль!!!</h2>
+      <div class="mt-5 form-group">
+        <a class="btn" href="{% url 'home' %}" style="background-color: #8b909e;" role="button" name="button">Нi дякую</a>
+        <a class="btn" href="{% url 'change_password' user.slug %}" style="background-color: #8b909e;" role="button" name="button">Змiнити</a>
+      </div>
+</div>
+</div>
+    {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ employee }}
+{% endblock %}
+
+
+{% block content %}
+<div class="mt-5 card mb-3" style="max-width: auto;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ employee.avatar.url }}" class="card-img-top" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+          <ul class="list-group list-group-flush ">
+            <li class="list-group-item text-center">{{ employee }}</li>
+            <li class="list-group-item">Вiддiл: {{ employee.department }}</li>
+            <li class="list-group-item">Посада: {{ employee.position }}</li>
+            <li class="list-group-item">
+                 <a href="{% url 'like_all' employee.slug %}"> Кiлькiсть подяк: {{ employee.like_count }} шт</a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

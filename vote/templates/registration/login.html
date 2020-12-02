@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <form class="mt-5 pt-5 text-center" action="" method="post">
+      {%csrf_token%}
+      <div class="form-group">
+           <input class="form-control" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="255" required id="id_username" placeholder="Логин"></p>
+              <input class="form-control" type="password" name="password" autocomplete="current-password" required id="id_password" placeholder="Пароль"></p>
+        <button class="btn" style="background-color: #8b909e;" type="submit" name="button"> Войти</button>
+      </div>
+    </form>
+</div>
+    {% endblock %}

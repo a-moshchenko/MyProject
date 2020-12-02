@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if department %}
+        {{ department }}
+        {% else %}
+        Bci вiддiли
+    {% endif %}
+{% endblock %}
+
+{% block info %}
+<p class="mt-3"  >Кращий спiвробiтник</p>
+{% endblock %}
+
+
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light">
+      <div class=" dropdown " style="margin: auto;">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <style>
+              @media only screen and (min-width: 100px) {
+                  .dropdown:hover .dropdown-menu {
+                      display: block;
+                      margin-top: 0;
+                  }
+              }
+              </style>
+              {% if department %}
+              {{ department }}
+              {% else %}
+              ВСI ВIДДIЛИ
+              {% endif %}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button"> <a href="{% url 'home' %}">Всi вiддiли</a> </button>
+              {% for dep in departments %}
+              <button class="dropdown-item" type="button"> <a href="{{ dep.get_absolute_url }}">{{ dep }}</a> </button>
+              {% endfor %}
+              {% if user.is_authenticated %}
+              <button class="dropdown-item" type="button"> <a href="{% url 'logout' %}">Вийти</a> </button>
+              <button class="dropdown-item" type="button"> <a href="{% url 'change_password' user.slug %}">Змiнити пароль</a> </button>
+              {% endif %}
+              {% if not user.is_authenticated %}
+              <button class="dropdown-item" type="button"> <a href="{% url 'login' %}">Увiйти</a> </button>
+              {% endif %}
+              {% if user.is_superuser %}
+              <button class="dropdown-item" type="button"> <a href="/admin">Admin</a> </button>
+              {% endif %}
+              <form action="" class=" pl-2 form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Пошук..." aria-label="Поиск" name="q">
+                  </form>
+
+          </div>
+      </div>
+</nav>
+    <div class=" mt-4 content-cards">
+        <div class="row">
+                {% for employee in all_employees %}
+            <div class="mx-auto card-body col-sm-4" style="text-align:center;">
+              <a href="{{ employee.get_absolute_url }}">
+                <img src="{{ employee.avatar.url }}" class="card-img-top rounded-lg" alt="...">
+                </a>
+                <div class="card-body">
+                  <a class="link" style="text-decoration: none; color: #ae1e55;" href="{{ employee.get_absolute_url }}"><h5 class="card-title">{{ employee }}</h5></a>
+                  {% if not user.is_authenticated %}
+                  <a href="{% url 'login' %}">
+                      {% elif user.is_authenticated%}
+                      <a href="{% url 'like'  employee.slug %}">
+                      {% endif %}
+                        <button type="button" class="btn" style="background-color: #8b909e; ">Like
+                            <span class="badge badge-light">{{ employee.like_count }}</span>
+                            <span class="badge badge-light">{{ employee.voted_list }}</span>
+                        </button></a>
+                    </div>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+        {% if is_paginated %}
+        <nav aria-label="Page navigation conatiner"></nav>
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; ПРЕД. </a></li>
+          {% endif %}
+          {% if page_obj.has_next %}
+          <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> СЛЕД. &raquo;</a></li>
+
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    {% endif %}
+    </div>
+{% endblock content %}

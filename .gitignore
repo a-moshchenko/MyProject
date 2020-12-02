@@ -1,0 +1,10 @@
+*.pyc
+__pycache__
+`.pytest_cache
+venv/
+node_modules/
+package-lock.json
+.vscode
+.idea
+*.pdf
+*.sh

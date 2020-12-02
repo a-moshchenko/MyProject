@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form class=""  method="post">
+{% csrf_token %}
+<div class="form-group">
+    <label for="id_description">Коментар:</label>
+    <textarea type="email" class="form-control" name="description" id="id_description" cols="40" rows="10"></textarea>
+    <small id="emailHelp" class="form-text text-muted"></small>
+    <button type="submit" class="mt-3 btn " style="background-color: #ae1e55; color: #8b909e;">Готово</button>
+  </div>
+</form>
+
+{% endblock %}
